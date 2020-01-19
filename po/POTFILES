@@ -1,0 +1,7 @@
+data/org.gnome.Safebox.desktop.in
+data/org.gnome.Safebox.appdata.xml.in
+data/org.gnome.Safebox.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+

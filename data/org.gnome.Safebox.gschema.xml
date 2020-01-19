@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="safebox">
+	<schema id="org.gnome.Safebox" path="/org/gnome/Safebox/">
+	</schema>
+</schemalist>
