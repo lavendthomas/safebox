@@ -27,3 +27,5 @@ class SafeboxWindow(Gtk.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        v = Vault("test", True)
+        v.create()

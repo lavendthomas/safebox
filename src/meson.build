@@ -29,6 +29,8 @@ safebox_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'backends.py',
+  'vaults_handler.py'
 ]
 
 install_data(safebox_sources, install_dir: moduledir)
