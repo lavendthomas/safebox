@@ -14,8 +14,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+import logging
 import os
+
+from .backends import Encfs
 
 from gi.repository import Gio, GLib
 
@@ -24,13 +26,13 @@ DEFAULT_VAULT_PATH = os.path.join(GLib.get_user_data_dir(), "vaults")
 
 class Vault:
 
-    """
-    :param is_internal: if the content of the folder is contained within the app's data
-    """
-    def __init__(self, name: str, is_internal: bool, custom_path: str = None):
+    def __init__(self, name: str, is_internal: bool = True, custom_path: str = None):
+        """
+            :param is_internal: if the content of the folder is contained within the app's data
+        """
         self.name: str = name
         self.is_internal: bool = is_internal
-        self.status = None
+        self.state = None
 
         if self.is_internal:
             self.directory: str = os.path.join(DEFAULT_VAULT_PATH, name)
@@ -41,6 +43,10 @@ class Vault:
     Creates or verify that the folder containing the encrypted data is existant and initialised
     """
     def create(self):
+        """
+        Initialises the folder containing the encrypted version of the data.
+        Creates the folder and initialises the encypted folder
+        """
         # Create DEFAULT_VAULT_PATH folder
         vaults_folder: Gio.File = Gio.File.new_for_path(DEFAULT_VAULT_PATH)
         if not vaults_folder.query_exists():
@@ -49,14 +55,23 @@ class Vault:
 
         directory: Gio.File = Gio.File.new_for_path(self.directory)
         if directory.query_exists():
-            print(self.directory + " exists")
+            logging.info(10, self.directory + " exists")
         else:
-            print(self.directory + " does not exist, creating it...")
+            logging.info(self.directory + " does not exist, creating it...")
             directory.make_directory()
-            print("Done.")
+            logging.info("Done.")
+        pass
+
+    def destroy(self):
+        """
+        Deletes the folder containing all of the encrypted data
+        """
         pass
 
     def mount(self):
+        encfs = Encfs
+        success = encfs.mount(None, "/home/thomas/encrypted", "/home/thomas/test", "pass")
+        logging.warning("Successful: ", success)
         pass
 
     def unmount(self):

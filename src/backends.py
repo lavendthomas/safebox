@@ -14,19 +14,58 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import logging
+import os
+import subprocess
+
 
 class EncryptionBackend:
 
     def __init__(self):
         pass
 
-    def mount(self):
+    def mount(self, source: str, destination: str, password: str) -> bool:
+        """
+        :param source: the path of the folder that contained encrypted content
+        :param destination: the path were the decrypted content should be stored
+        :param password: the password used to store the content
+        :returns True if the folder was successfully decrypted and mounted on the folder
+        """
         pass
 
     def unmount(self):
         pass
 
+
+ENCFS_PATH: str = "/app/bin/encfs"      # TODO add in the flatpak
+
+
 class Encfs(EncryptionBackend):
 
     def __init__(self):
         super().__init__()
+
+    def mount(self, source, destination, password):
+        new_env = os.environ.copy()
+
+        args = [
+            ENCFS_PATH,
+            "-S",               # Read password from stdin
+            "--standard",       # If creating a file system, use the default options
+            source,
+            destination
+        ]
+
+        process = subprocess.Popen(
+            args=args,
+            stdin=subprocess.PIPE if destination else None,
+            stderr=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            env=new_env
+        )
+
+        logging.info(str(process.returncode))
+
+        # something else than 'None' indicates that the process already terminated
+        if not (process.returncode is None):
+            pass

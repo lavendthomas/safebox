@@ -18,7 +18,6 @@
 from gi.repository import Gtk, GLib
 from .vaults_handler import Vault
 
-
 @Gtk.Template(resource_path='/org/gnome/Safebox/window.ui')
 class SafeboxWindow(Gtk.ApplicationWindow):
     __gtype_name__ = 'SafeboxWindow'
@@ -29,3 +28,4 @@ class SafeboxWindow(Gtk.ApplicationWindow):
         super().__init__(**kwargs)
         v = Vault("test", True)
         v.create()
+        v.mount()

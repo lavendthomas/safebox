@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+import logging
 import sys
 import gi
 
@@ -38,5 +38,8 @@ class Application(Gtk.Application):
 
 
 def main(version):
+    # Change logger level
+    logging.basicConfig(stream=sys.stderr, level=logging.INFO)
+
     app = Application()
     return app.run(sys.argv)
