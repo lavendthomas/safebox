@@ -37,7 +37,7 @@ class EncryptionBackend:
         pass
 
 
-ENCFS_PATH: str = "/app/bin/encfs"      # TODO add in the flatpak
+ENCFS_PATH: str = "/usr/bin/encfs"      # TODO add in the flatpak
 
 
 class Encfs(EncryptionBackend):
