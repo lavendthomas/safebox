@@ -34,10 +34,15 @@ class EncryptionBackend:
         pass
 
     def unmount(self):
+        """
+        Unmounts the folder containing the decrypted folder
+        :returns: True if the decrypted folder was successfully decrypted
+        """
         pass
 
 
 ENCFS_PATH: str = "/usr/bin/encfs"      # TODO add in the flatpak
+FUSERMOUNT_PATH: str = "/usr/bin/fusermount"
 
 
 class Encfs(EncryptionBackend):
@@ -69,3 +74,26 @@ class Encfs(EncryptionBackend):
         # something else than 'None' indicates that the process already terminated
         if not (process.returncode is None):
             pass
+
+        def unmount(self):
+            new_env = os.environ.copy()
+
+            args = [
+                FUSERMOUNT_PATH,
+                "-u",
+                destination
+            ]
+
+            process = subprocess.Popen(
+                args=args,
+                stdin=subprocess.PIPE if destination else None,
+                stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                env=new_env
+            )
+
+            logging.info(str(process.returncode))
+
+            # something else than 'None' indicates that the process already terminated
+            if not (process.returncode is None):
+                pass

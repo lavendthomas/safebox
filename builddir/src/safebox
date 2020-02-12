@@ -1,4 +1,6 @@
-# main.py
+#!/usr/bin/python3
+
+# safebox.in
 #
 # Copyright 2020 Thomas Lavend'Homme
 #
@@ -14,32 +16,26 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-import logging
+
+import os
 import sys
-import gi
+import signal
+import gettext
 
-gi.require_version('Gtk', '3.0')
+VERSION = '0.1.0'
+pkgdatadir = '/usr/share/safebox'
+localedir = '/usr/share/locale'
 
-from gi.repository import Gtk, Gio
+sys.path.insert(1, pkgdatadir)
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+gettext.install('safebox', localedir)
 
-from .window import SafeboxWindow
+if __name__ == '__main__':
+    import gi
 
+    from gi.repository import Gio
+    resource = Gio.Resource.load(os.path.join(pkgdatadir, 'safebox.gresource'))
+    resource._register()
 
-class Application(Gtk.Application):
-    def __init__(self):
-        super().__init__(application_id='org.gnome.Safebox',
-                         flags=Gio.ApplicationFlags.FLAGS_NONE)
-
-    def do_activate(self):
-        win = self.props.active_window
-        if not win:
-            win = SafeboxWindow(application=self)
-        # win.present() # TODO re-enable
-
-
-def main(version):
-    # Change logger level
-    logging.basicConfig(stream=sys.stderr, level=logging.INFO)
-
-    app = Application()
-    return app.run(sys.argv)
+    from safebox import main
+    sys.exit(main.main(VERSION))

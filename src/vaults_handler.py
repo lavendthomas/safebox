@@ -21,7 +21,8 @@ from .backends import Encfs
 
 from gi.repository import Gio, GLib
 
-DEFAULT_VAULT_PATH = os.path.join(GLib.get_user_data_dir(), "vaults")
+DEFAULT_SAFEBOX_PATH = os.path.join(GLib.get_user_data_dir(), "safebox")
+DEFAULT_VAULT_PATH = os.path.join(GLib.get_user_data_dir(), "safebox", "vaults")
 
 
 class Vault:
@@ -48,6 +49,11 @@ class Vault:
         Creates the folder and initialises the encypted folder
         """
         # Create DEFAULT_VAULT_PATH folder
+        safebox_folder: Gio.File = Gio.File.new_for_path(DEFAULT_SAFEBOX_PATH)
+        if not safebox_folder.query_exists():
+            safebox_folder.make_directory()
+        del safebox_folder
+
         vaults_folder: Gio.File = Gio.File.new_for_path(DEFAULT_VAULT_PATH)
         if not vaults_folder.query_exists():
             vaults_folder.make_directory()
@@ -70,10 +76,15 @@ class Vault:
 
     def mount(self):
         encfs = Encfs
-        success = encfs.mount(None, "/home/thomas/encrypted", "/home/thomas/test", "pass")
+        success = encfs.mount(None,
+                              DEFAULT_VAULT_PATH+"/test",
+                              os.path.join(GLib.get_home_dir(), "Bureau", "/test"),
+                              "pass")
+
         logging.warning("Successful: ", success)
-        pass
 
     def unmount(self):
-        pass
+        encfs = Encfs
+        success = encfs.unmount(encfs)
+        logging.warning("Unmounting successful")
 
