@@ -1,4 +1,6 @@
 .idea
+build-aux/
+builddir
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

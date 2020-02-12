@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=safebox
-Exec=safebox
-Terminal=false
-Type=Application
-Categories=GTK;
-StartupNotify=true
