@@ -17,7 +17,7 @@
 import logging
 import os
 
-from .backends import Encfs
+from .backends import Encfs, EncryptionBackend
 
 from gi.repository import Gio, GLib
 
@@ -27,18 +27,21 @@ DEFAULT_VAULT_PATH = os.path.join(GLib.get_user_data_dir(), "safebox", "vaults")
 
 class Vault:
 
-    def __init__(self, name: str, is_internal: bool = True, custom_path: str = None):
+    def __init__(self, name: str, password: str, is_internal: bool = True, custom_path: str = None):
         """
             :param is_internal: if the content of the folder is contained within the app's data
         """
         self.name: str = name
         self.is_internal: bool = is_internal
         self.state = None
+        self.password = password
 
         if self.is_internal:
-            self.directory: str = os.path.join(DEFAULT_VAULT_PATH, name)
+            self.encrypted_directory: str = os.path.join(DEFAULT_VAULT_PATH, name)
         else:
-            self.directory: str = custom_path
+            self.encrypted_directory: str = custom_path
+
+        self.mounted_directory = os.path.join(GLib.get_home_dir(), "Bureau", "safetest")
 
     """
     Creates or verify that the folder containing the encrypted data is existant and initialised
@@ -48,25 +51,31 @@ class Vault:
         Initialises the folder containing the encrypted version of the data.
         Creates the folder and initialises the encypted folder
         """
-        # Create DEFAULT_VAULT_PATH folder
+
+        # Create all necessary folders
         safebox_folder: Gio.File = Gio.File.new_for_path(DEFAULT_SAFEBOX_PATH)
-        if not safebox_folder.query_exists():
-            safebox_folder.make_directory()
-        del safebox_folder
-
         vaults_folder: Gio.File = Gio.File.new_for_path(DEFAULT_VAULT_PATH)
-        if not vaults_folder.query_exists():
-            vaults_folder.make_directory()
-        del vaults_folder
+        encrypted_directory: Gio.File = Gio.File.new_for_path(self.encrypted_directory)
+        mounted_dir: Gio.File = Gio.File.new_for_path(self.mounted_directory)
 
-        directory: Gio.File = Gio.File.new_for_path(self.directory)
-        if directory.query_exists():
-            logging.info(10, self.directory + " exists")
-        else:
-            logging.info(self.directory + " does not exist, creating it...")
-            directory.make_directory()
-            logging.info("Done.")
-        pass
+        for _directory in [safebox_folder,
+                           vaults_folder,
+                           encrypted_directory,
+                           mounted_dir]:
+
+            if _directory.query_exists():
+                logging.info(self.encrypted_directory + " exists.")
+            else:
+                logging.info(self.encrypted_directory + " does not exist, creating it...")
+                _directory.make_directory()
+                logging.info("Done.")
+            del _directory
+
+        encryption: EncryptionBackend = Encfs()
+
+        encryption.init(self.encrypted_directory,
+                        self.mounted_directory,
+                        "pass")
 
     def destroy(self):
         """
@@ -75,16 +84,15 @@ class Vault:
         pass
 
     def mount(self):
-        encfs = Encfs
-        success = encfs.mount(None,
-                              DEFAULT_VAULT_PATH+"/test",
-                              os.path.join(GLib.get_home_dir(), "Bureau", "/test"),
-                              "pass")
+        encryption: EncryptionBackend = Encfs()
+        success = encryption.mount(self.encrypted_directory,
+                                   self.mounted_directory,
+                                   "pass")
 
-        logging.warning("Successful: ", success)
+        logging.info("Sucessfully mounted: ", success)
 
     def unmount(self):
-        encfs = Encfs
-        success = encfs.unmount(encfs)
-        logging.warning("Unmounting successful")
+        encryption: EncryptionBackend = Encfs
+        success = encryption.unmount(encryption)
+        logging.info("Unmounting successful")
 

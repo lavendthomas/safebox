@@ -40,6 +40,16 @@ class EncryptionBackend:
         """
         pass
 
+    def init(self, source: str, destination: str, password: str):
+        """
+        Initialises the encrypted folder with the password give as a parameter and mounts it
+        :param source: The folder containing the encrypted data
+        :param destination: The folder on which the decrypted data is mounted
+        :param password: The password used to create the encrypted volume
+        :return: True if the folder was sucessfully en
+        """
+        pass
+
 
 ENCFS_PATH: str = "/usr/bin/encfs"      # TODO add in the flatpak
 FUSERMOUNT_PATH: str = "/usr/bin/fusermount"
@@ -50,8 +60,38 @@ class Encfs(EncryptionBackend):
     def __init__(self):
         super().__init__()
 
-    def mount(self, source, destination, password):
+    def init(self, source, destination, password: str):
         new_env = os.environ.copy()
+
+        logging.info("Init...")
+
+        encfs_input = password     # input the password
+
+        args = [
+            ENCFS_PATH,
+            "-S",
+            "--standard",
+            source,
+            destination
+        ]
+
+        process = subprocess.Popen(
+            args=args,
+            stdin=subprocess.PIPE if destination else None,
+            stderr=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            env=new_env
+        )
+
+        comm = process.communicate(bytes(encfs_input, "utf-8"))
+        output = comm[0].decode().splitlines(False)
+        logging.info("comm:" + str(comm))
+        logging.info("Output:" + str(output))
+
+    def mount(self, source, destination, password: str):
+        new_env = os.environ.copy()
+
+        encfs_input = password  # input the password
 
         args = [
             ENCFS_PATH,
@@ -69,7 +109,10 @@ class Encfs(EncryptionBackend):
             env=new_env
         )
 
-        logging.info(str(process.returncode))
+        comm = process.communicate(bytes(encfs_input, "utf-8"))
+        output = comm[0].decode().splitlines(False)
+
+        logging.info(str(process.returncode), output)
 
         # something else than 'None' indicates that the process already terminated
         if not (process.returncode is None):

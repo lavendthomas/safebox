@@ -14,6 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import logging
 
 from gi.repository import Gtk, GLib
 from .vaults_handler import Vault
@@ -22,7 +23,6 @@ import os
 #@Gtk.Template(resource_path='/org/gnome/Safebox/window.ui')
 class SafeboxWindow(Gtk.ApplicationWindow):
     __gtype_name__ = 'SafeboxWindow'
-
 
 
     label = Gtk.Template.Child()
@@ -53,11 +53,11 @@ class SafeboxWindow(Gtk.ApplicationWindow):
 
 
     def _on_mount_button_clicked(self, source):
-        print("Hello World!")
+        logging.info("Hello World!")
 
         v = Vault("test", True)
         v.create()
-        v.mount()
+        # v.mount()
         # v.unmount()
 
 
