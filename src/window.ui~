@@ -69,6 +69,8 @@ Author: Thomas Lavend'Homme
                           <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
                             <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkImage">
@@ -124,17 +126,19 @@ to store all youf sentitive content.</property>
                           <object class="GtkStack" id="first_safebox_stack">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
                             <property name="transition_type">slide-left</property>
                             <property name="interpolate_size">True</property>
                             <child>
-                              <object class="GtkButton" id="new_vaults_lets_start">
-                                <property name="label" translatable="yes">Let's start...</property>
+                              <object class="GtkButton" id="first_safebox_lets_start">
+                                <property name="label" translatable="yes">Let's get stated...</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="halign">center</property>
                                 <property name="valign">center</property>
-                                <signal name="clicked" handler="on_mount_button_clicked" swapped="no"/>
+                                <signal name="clicked" handler="on_lets_get_started" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="name">page0</property>
@@ -142,7 +146,7 @@ to store all youf sentitive content.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="new_safebox_name_choice_box">
+                              <object class="GtkBox" id="first_safebox_name_choice_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
@@ -161,6 +165,7 @@ to store all youf sentitive content.</property>
                                         <property name="can_focus">True</property>
                                         <property name="valign">center</property>
                                         <property name="hexpand">True</property>
+                                        <property name="input_purpose">name</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">1</property>
@@ -199,6 +204,9 @@ to store all youf sentitive content.</property>
                                         <property name="can_focus">True</property>
                                         <property name="valign">center</property>
                                         <property name="hexpand">True</property>
+                                        <property name="visibility">False</property>
+                                        <property name="invisible_char">*</property>
+                                        <property name="input_purpose">password</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">1</property>
@@ -213,7 +221,7 @@ to store all youf sentitive content.</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkButton" id="add_first_safebox_buttom">
+                                  <object class="GtkButton" id="first_safebox_add_button">
                                     <property name="label" translatable="yes">Add</property>
                                     <property name="name">first_safebox_add_button</property>
                                     <property name="visible">True</property>
@@ -221,6 +229,7 @@ to store all youf sentitive content.</property>
                                     <property name="receives_default">True</property>
                                     <property name="halign">center</property>
                                     <property name="valign">center</property>
+                                    <signal name="clicked" handler="on_first_safebox_add_button_clicked" swapped="no"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -237,6 +246,7 @@ to store all youf sentitive content.</property>
                             </child>
                             <child>
                               <object class="GtkBox">
+                                <property name="name">new_safebox_</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
@@ -244,7 +254,7 @@ to store all youf sentitive content.</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkLabel" id="first_safebox_warning_label">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">center</property>
@@ -300,9 +310,6 @@ $HOME/.local/safebox/</property>
                         <property name="name">page0</property>
                         <property name="title" translatable="yes">page0</property>
                       </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
                     </child>
                   </object>
                 </child>
