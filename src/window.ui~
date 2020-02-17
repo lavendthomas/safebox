@@ -245,7 +245,7 @@ to store all youf sentitive content.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox">
+                              <object class="GtkBox" id="first_safebox_warning_box">
                                 <property name="name">new_safebox_</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -262,7 +262,7 @@ to store all youf sentitive content.</property>
                                     <property name="label" translatable="yes">Please note that it is impossible to recover your password.
 Take the time to write it down.
 
-The decrypted folder is availible in the Desktop folder
+The decrypted folder is availaible in the Desktop folder
 and in the Nautilus mounted volumes.
 
 The encrypyed version of your data is stored in:
