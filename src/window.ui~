@@ -61,7 +61,7 @@ Author: Thomas Lavend'Homme
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
-                        <property name="spacing">12</property>
+                        <property name="spacing">24</property>
                         <child>
                           <object class="GtkBox">
                             <property name="visible">True</property>
@@ -117,7 +117,7 @@ Author: Thomas Lavend'Homme
                         </child>
                         <child>
                           <object class="GtkButton" id="new_vaults_lets_start">
-                            <property name="label" translatable="yes">button</property>
+                            <property name="label" translatable="yes">Let's start...</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>

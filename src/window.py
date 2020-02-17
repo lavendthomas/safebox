@@ -20,7 +20,7 @@ from gi.repository import Gtk, GLib
 from .vaults_handler import Vault
 import os
 
-#@Gtk.Template(resource_path='/org/gnome/Safebox/window.ui')
+@Gtk.Template(resource_path='/org/gnome/Safebox/window.ui')
 class SafeboxWindow(Gtk.ApplicationWindow):
     __gtype_name__ = 'SafeboxWindow'
 
