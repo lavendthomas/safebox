@@ -1,0 +1,11 @@
+Build started at 2020-02-17T09:24:38.112437
+Main binary: /usr/bin/python3
+Build Options: -Dprefix=/usr
+Python system: Linux
+The Meson build system
+Version: 0.52.0
+Source dir: /home/thomas/Documents/Projects/safebox/src
+Build dir: /home/thomas/Documents/Projects/safebox/src/builddir
+Build type: native build
+
+ERROR: First statement must be a call to project
