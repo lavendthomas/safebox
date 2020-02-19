@@ -26,7 +26,7 @@ Author: Thomas Lavend'Homme
   <!-- interface-license-type gplv3 -->
   <!-- interface-name Safebox -->
   <!-- interface-authors Thomas Lavend'Homme -->
-  <template class="SafeboxGroup" parent="GtkBox">
+  <object class="GtkBox" id="SafeboxGroup">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="margin_left">6</property>
@@ -53,5 +53,5 @@ Author: Thomas Lavend'Homme
     <child>
       <placeholder/>
     </child>
-  </template>
+  </object>
 </interface>

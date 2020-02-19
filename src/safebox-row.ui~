@@ -26,7 +26,7 @@ Author: Thomas Lavend'Homme
   <!-- interface-license-type gplv3 -->
   <!-- interface-name Safebox -->
   <!-- interface-authors Thomas Lavend'Homme -->
-  <template class="SafeboxRow" parent="GtkListBoxRow">
+  <object class="GtkListBoxRow" id="SafeboxRow">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
@@ -73,9 +73,6 @@ Author: Thomas Lavend'Homme
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
-                    </child>
-                    <child>
                       <object class="GtkSpinner" id="spinner">
                         <property name="width_request">30</property>
                         <property name="height_request">30</property>
@@ -90,14 +87,8 @@ Author: Thomas Lavend'Homme
                       </object>
                       <packing>
                         <property name="name">check</property>
-                        <property name="position">2</property>
+                        <property name="position">1</property>
                       </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
                     </child>
                   </object>
                   <packing>
@@ -599,5 +590,5 @@ Author: Thomas Lavend'Homme
     <style>
       <class name="torrent-box"/>
     </style>
-  </template>
+  </object>
 </interface>

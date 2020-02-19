@@ -19,6 +19,7 @@ import logging
 from gi.repository import Gtk, GLib
 from .vaults_handler import Vault
 from .safebox_row import SafeboxRow
+from .safebox_group import SafeboxGroup
 import os
 
 @Gtk.Template(resource_path='/org/gnome/Safebox/window.ui')
@@ -69,9 +70,13 @@ class SafeboxWindow(Gtk.ApplicationWindow):
     def on_first_safebox_i_understand_button_clicked(self, source):
 
         dummy_row = SafeboxRow("test")
+        dummy_group = SafeboxGroup("Mounted")
+        # dummy_row.row.connect("clicked", dummy_row.toggle_revealer)
+
+        dummy_group.group.pack_start(dummy_row.row, True, True, 0)
 
         safeboxes_list_viewport = self.builder.get_object("safeboxes_list_viewport")
-        safeboxes_list_viewport.add(dummy_row.row)
+        safeboxes_list_viewport.add(dummy_group.group)
 
         safeboxes_stack = self.builder.get_object("safeboxes_stack")
         safeboxes_stack.set_visible_child(safeboxes_list_viewport)

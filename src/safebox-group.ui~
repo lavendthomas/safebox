@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.22.1 
+
+Copyright (C) 
+
+This file is part of Safebox.
+
+Safebox is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Safebox is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Safebox.  If not, see <http://www.gnu.org/licenses/>.
+
+Author: Thomas Lavend'Homme
+
+-->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <template class="SafeboxGroup" parent="GtkBox">
+  <!-- interface-license-type gplv3 -->
+  <!-- interface-name Safebox -->
+  <!-- interface-authors Thomas Lavend'Homme -->
+  <object class="GtkBox" id="SafeboxGroup">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="margin_left">6</property>
@@ -29,5 +53,5 @@
     <child>
       <placeholder/>
     </child>
-  </template>
+  </object>
 </interface>

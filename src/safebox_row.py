@@ -25,7 +25,6 @@ class SafeboxRow(Gtk.ListBoxRow):
 
     name_label = Gtk.Template.Child()
     mount_button = Gtk.Template.Child()
-    revealer = Gtk.Template.Child()
     status_label = Gtk.Template.Child()
     encrypted_location_label = Gtk.Template.Child()
     decrypted_location_label = Gtk.Template.Child()
@@ -47,12 +46,8 @@ class SafeboxRow(Gtk.ListBoxRow):
             "/org/gnome/Safebox/safebox-row.ui")
         self.builder.connect_signals(self.handlers)
 
-        self.name_label = self.builder.get_object("name_label")
-
-        # logging.info(name_label.get_text())
-
+        self.revealer = self.builder.get_object("revealer")
         self.row = self.builder.get_object("SafeboxRow")
-        self.row.show_all()
 
 
 

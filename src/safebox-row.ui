@@ -172,6 +172,7 @@ Author: Thomas Lavend'Homme
                         <property name="receives_default">True</property>
                         <property name="halign">center</property>
                         <property name="valign">center</property>
+                        <signal name="clicked" handler="toggle_revealer" swapped="no"/>
                         <child>
                           <object class="GtkImage">
                             <property name="visible">True</property>
