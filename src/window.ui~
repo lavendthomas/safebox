@@ -53,18 +53,18 @@ Author: Thomas Lavend'Homme
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkStack" id="vaults_stack">
+                  <object class="GtkStack" id="safeboxes_stack">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="interpolate_size">True</property>
                     <child>
-                      <object class="GtkBox" id="new_vault_box">
+                      <object class="GtkBox" id="first_safebox_box">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
-                        <property name="spacing">24</property>
+                        <property name="spacing">12</property>
                         <child>
                           <object class="GtkBox">
                             <property name="visible">True</property>
@@ -120,6 +120,17 @@ to store all youf sentitive content.</property>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -302,13 +313,27 @@ $HOME/.local/safebox/</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="name">page0</property>
                         <property name="title" translatable="yes">page0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkViewport" id="safeboxes_list_viewport">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="name">page1</property>
+                        <property name="title" translatable="yes">page1</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                   </object>

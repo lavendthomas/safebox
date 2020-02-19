@@ -18,6 +18,7 @@ import logging
 
 from gi.repository import Gtk, GLib
 from .vaults_handler import Vault
+from .safebox_row import SafeboxRow
 import os
 
 @Gtk.Template(resource_path='/org/gnome/Safebox/window.ui')
@@ -27,9 +28,6 @@ class SafeboxWindow(Gtk.ApplicationWindow):
 
     label = Gtk.Template.Child()
 
-    def _test(self):
-        print("test")
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -37,7 +35,8 @@ class SafeboxWindow(Gtk.ApplicationWindow):
             "onDestroy": Gtk.main_quit,
             "on_mount_button_clicked": self._on_mount_button_clicked,
             "on_lets_get_started": self.on_lets_get_started,
-            "on_first_safebox_add_button_clicked": self.on_first_safebox_add_button_clicked
+            "on_first_safebox_add_button_clicked": self.on_first_safebox_add_button_clicked,
+            "on_first_safebox_i_understand_button_clicked": self.on_first_safebox_i_understand_button_clicked
         }
 
         self.builder = Gtk.Builder()
@@ -66,6 +65,22 @@ class SafeboxWindow(Gtk.ApplicationWindow):
         first_safebox_stack: Gtk.Stack = self.builder.get_object("first_safebox_stack")
         warning_box = self.builder.get_object("first_safebox_warning_box")
         first_safebox_stack.set_visible_child(warning_box)
+
+    def on_first_safebox_i_understand_button_clicked(self, source):
+
+        dummy_row = SafeboxRow("test")
+
+        safeboxes_list_viewport = self.builder.get_object("safeboxes_list_viewport")
+        safeboxes_list_viewport.add(dummy_row.row)
+
+        safeboxes_stack = self.builder.get_object("safeboxes_stack")
+        safeboxes_stack.set_visible_child(safeboxes_list_viewport)
+
+        safeboxes_stack.show_all()
+        safeboxes_list_viewport.show_all()
+        dummy_row.show_all()
+
+        logging.info("Visible" + str(safeboxes_stack.get_visible_child().get_children()))
 
     def _on_mount_button_clicked(self, source):
         logging.info("Hello World!")

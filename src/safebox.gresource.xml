@@ -2,5 +2,7 @@
 <gresources>
   <gresource prefix="/org/gnome/Safebox">
     <file>window.ui</file>
+    <file>safebox-group.ui</file>
+    <file>safebox-row.ui</file>
   </gresource>
 </gresources>
