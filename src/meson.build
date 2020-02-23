@@ -32,7 +32,8 @@ safebox_sources = [
   'backends.py',
   'vaults_handler.py',
   'safebox_row.py',
-  'safebox_group.py'
+  'safebox_group.py',
+  'safeboxes_manager.py'
 ]
 
 install_data(safebox_sources, install_dir: moduledir)

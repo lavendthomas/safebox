@@ -12,3 +12,4 @@
 /usr/share/safebox/safebox/vaults_handler.py
 /usr/share/safebox/safebox/safebox_row.py
 /usr/share/safebox/safebox/safebox_group.py
+/usr/share/safebox/safebox/safeboxes_manager.py

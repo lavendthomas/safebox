@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from .safeboxes_manager import SafeboxManger
+
 from gi.repository import Gtk
 
 import logging
@@ -54,3 +56,5 @@ class SafeboxRow(Gtk.ListBoxRow):
 
     def toggle_revealer(self, source):
         self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
+
+        SafeboxManger.list_safeboxes()

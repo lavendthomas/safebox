@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from .vaults_handler import DEFAULT_SAFEBOX_PATH, DEFAULT_VAULT_PATH
+from os import listdir
+import logging
+
 
 class SafeboxManger:
     """
@@ -23,3 +27,12 @@ class SafeboxManger:
 
     def __init__(self):
         pass
+
+    @staticmethod
+    def list_safeboxes():
+
+        folders = listdir(DEFAULT_SAFEBOX_PATH)
+        logging.info(folders)
+
+
+
